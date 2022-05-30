@@ -1,0 +1,18 @@
+[book]
+authors = ["axionl"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Arch Linux RISCV Tutorial"
+
+[build]
+build-dir = "docs"
+create-missing = true
+
+[output.html]
+default-theme = "light"
+mathjax-support = true
+git-repository-url = "https://github.com/axionl/ArchLinuxRSICVTutorial"
+
+[output.html.playground]
+editable = false
