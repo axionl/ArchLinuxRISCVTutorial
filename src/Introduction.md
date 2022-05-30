@@ -56,6 +56,6 @@ RISC-V 是精简指令集的一代表之作，由于其开源、精简的特性�
 | Dependency '*' not satisfied. | 依赖不满足 |
 | Leaf package, port it! | 无关联依赖包，可直接移植 |
 
-## [快速上手](./Usage.md)
+## [快速上手](./Usage/Usage.md)
 
-## [贡献指南](./Contribution.md)
+## [贡献指南](./Contribution/Contribution.md)
