@@ -13,6 +13,7 @@ create-missing = true
 default-theme = "light"
 mathjax-support = true
 git-repository-url = "https://github.com/axionl/ArchLinuxRSICVTutorial"
+cname = "wayland.axionl.me"
 
 [output.html.playground]
 editable = false

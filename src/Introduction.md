@@ -1,6 +1,6 @@
 # 介绍
 
-![Banner](/static/images/banner.png)
+![Banner](https://raw.githubusercontent.com/axionl/ArchLinuxRSICVTutorial/master/static/images/banner.png)
 
 Arch Linux RISC-V 项目隶属 [PLCT Lab](https://plctlab.org) 旗下，是一个旨在为 RISC-V 架构进行软件可用性移植的开源项目。通过对源码进行一系列 Patch 和测试，使得其他平台软件能够分发到对应架构上并正常使用。
 

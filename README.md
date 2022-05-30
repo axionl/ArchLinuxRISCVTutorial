@@ -1,6 +1,6 @@
 # Arch Linux RISC-V TUTORIAL
 
-![Banner](static/images/banner.png)
+![Banner](https://raw.githubusercontent.com/axionl/ArchLinuxRSICVTutorial/master/static/images/banner.png)
 
 ## 说明
 
