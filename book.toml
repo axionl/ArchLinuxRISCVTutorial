@@ -12,8 +12,9 @@ create-missing = true
 [output.html]
 default-theme = "light"
 mathjax-support = true
-git-repository-url = "https://github.com/axionl/ArchLinuxRSICVTutorial"
-cname = "wayland.axionl.me"
+git-repository-url = "https://github.com/axionl/ArchLinuxRISCVTutorial"
+cname = "riscv.axionl.me"
+site-url = "/ArchLinuxRISCVTutorial/"
 
 [output.html.playground]
 editable = false
