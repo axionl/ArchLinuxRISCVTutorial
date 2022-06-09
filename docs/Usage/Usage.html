@@ -147,7 +147,58 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="快速使用"><a class="header" href="#快速使用">快速使用</a></h1>
+                        <h1 id="快速上手"><a class="header" href="#快速上手">快速上手</a></h1>
+<ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B">快速上手</a>
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96-pkgbuild">获取 PKGBUILD</a>
+<ul>
+<li><a href="#git-%E6%88%96-web">Git 或 Web</a></li>
+<li><a href="#asp">asp</a></li>
+<li><a href="#aur-helper">AUR Helper</a></li>
+</ul>
+</li>
+<li><a href="#%E6%89%93%E4%B8%8A-patch-">打上 Patch 🎇</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="简介"><a class="header" href="#简介">简介</a></h2>
+<blockquote>
+<p>同学，你听说过 Arch Linux 吗？</p>
+</blockquote>
+<p>可能你没用过 Arch Linux，但或多或少也听说，甚至体验过过 AUR。用户提交一个构建包的描述文件 —— PKGBUILD，通过 AUR 平台分发这个文件，其他用户就可以在自己的设备上自动构建所需要的包。</p>
+<p>Arch RISCV 的打包方式与常规的 Arch 打包方式略有不同，与其说是在打包，不如说是在原有的 PKGBUILD 上打补丁，通过 patch 的方式把这个 PKGBUILD 修改成自己需要的样子。之所以没像 Arch Linux ARM 那样完全独立出去，是因为希望有朝一日能得到 Arch Linux 官方架构支持。</p>
+<p><img src="Images/zola.png" alt="Zola Preview" /></p>
+<p>如上图所示是一个 <code>Rust</code> 语言开发的静态博客生成工具 <code>zola</code>（看不清可以右键新建标签页中打开），右边是原始的 Arch Linux PKGBUILD，而左边是我们为了能在 RISCV 架构上顺利打出这个包所做的一点 “修补”。 </p>
+<p>可以看到这个补丁移除了原有 PKGBUILD 指定编译到目标架构 <code>$CARCH</code> 的部分内容。 <a href="https://wiki.archlinux.org/title/PKGBUILD#arch"><code>$CARCH</code></a> 相关内容在 Arch Wiki 中有提及，这里不作赘述。</p>
+<p>可以看到这个包很有意思的地方在于直接替换了 <code>ring</code> 这个依赖库的上游。对于一些密码学相关的库，若只是平时使用到不会觉得有太多不同，但对于实际开发和编译来说，会牵扯到很多架构上特有的问题，从打包变到针对架构开发也成了自然而然的事情，这里也感谢肥猫的卓越贡献。</p>
+<h2 id="获取-pkgbuild"><a class="header" href="#获取-pkgbuild">获取 PKGBUILD</a></h2>
+<h3 id="git-或-web"><a class="header" href="#git-或-web">Git 或 Web</a></h3>
+<p>记得小的时候还用过一个名为世界之窗的浏览器，浏览器作为沟通网络世界的窗户，自然是能够直接获取到 PKGBUILD 原始文件的。</p>
+<p>Arch Linux 已经完成了从 SVN 到 Git 的迁移，现在所有官方软件包的构建文件都能在 <a href="https://github.com/archlinux/svntogit-community/">https://github.com/archlinux/svntogit-community/</a> 仓库中找到。</p>
+<p>但是 Github 提供的搜索功能较为有限，也可以通过 <a href="https://archlinux.org/packages/">https://archlinux.org/packages/</a> 页面找到所需要的包，然后右上角 <code>Package Actions &gt; Source Files</code> 转跳到目的链接。</p>
+<h3 id="asp"><a class="header" href="#asp">asp</a></h3>
+<p>除此之外，Arch 开发者在以前 SVN 的时代为了方便同步构建源代码，还开发了名为 <code>asp</code> 的构建资源管理工具。</p>
+<p><code>$ sudo pacman -S asp</code> 即可快速安装。</p>
+<p>获取软件包命令如下：</p>
+<pre><code class="language-bash">$ asp checkout &lt;package name&gt;
+
+.
+├── repos
+│   └── community-x86_64
+│       └── PKGBUILD
+└── trunk
+    └── PKGBUILD
+</code></pre>
+<p>可以看到还是保留了 SVN 的目录结构，<code>trunk</code> 即为主线，对应 git 上的 <code>main</code> 或者 <code>master</code>，<code>repos</code> 内是对应软件源分支，一个软件可能同时存在稳定版和测试版两种软件包状态，那么在这里的 <code>repos</code> 中就会多一个分支，我们在打包时候按需选取即可。</p>
+<h3 id="aur-helper"><a class="header" href="#aur-helper">AUR Helper</a></h3>
+<p>AUR Helper 从来都不是特指某一个工具，而是某一类能帮你从 AUR 上拉去构建资源文件的工具，并且自动帮你完成构建。比如早期的 <code>yaourt</code>，现在比较流行的 <code>paru</code> 和 <code>yay</code> 等。很高兴它们都提供了下载官方软件包资源的功能，为我们的使用提供了方便。</p>
+<pre><code class="language-bash">$ paru -G &lt;package name&gt;
+$ yay -G &lt;package name&gt;
+</code></pre>
+<p>使用更加方便，没有复杂的目录结构，只有单纯的文件，如果需要来自不同软件源的则需要在拉取的时候带上软件源名称，比如 <code>community/zola</code>。</p>
+<h2 id="打上-patch-"><a class="header" href="#打上-patch-">打上 Patch 🎇</a></h2>
 
                     </main>
 
